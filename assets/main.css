@@ -4,3 +4,7 @@
     box-shadow: 0 0 5px gray;
   
 }
+.team {
+    display: flex;
+    flex-direction: column;
+}
