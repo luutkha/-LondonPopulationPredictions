@@ -2,13 +2,21 @@ import dash_bootstrap_components as dbc
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-
+import pandas as pd
+import plotly.express as px
 app = dash.Dash(__name__, suppress_callback_exceptions=True,
                 external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content'),
 ])
+
+#####
+df_test = pd.read_excel('./central_trend_2017_base.xlsx')
+t5 = df_test.head(10)
+testFig = px.line(t5, x=2020, y=2021, title='Life expectancy in Canada')
+
+#####
 
 main = html.Div([
     # home page text
@@ -140,12 +148,76 @@ simpleChart = html.Div([
 ], className='container cc')
 
 ##-----------------------------------------------------
+# Line Chart Link
+lineChart = html.Div([
+     html.Div(style={
+        'width': '100%',
+        'height': '100%',
+        'position': 'absolute',
+        'top': '0',
+        'left': '0',
+        'z-index': '-999'
+    }, className='bg-dark'),
+     # home page text
+    html.Div('This is project of our team with Dash - plotly ', style={
+        'height': '50px',
+        'width': '100%',
+        'backgroundColor': '#f5f5f5',
+        'paddingLeft': '25px',
+        'position': 'absolute',
+        'top': '0',
+        'left': '0',
+        'display': 'flex',
+        'alignItems': 'center'
+    }),
+    html.Div([
+        html.Div([
+            html.Ul([
+                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Line Chart', href="/line-chart", className='el'),
+                dcc.Link('Bar Chart', href="/bar-chart", className='el'),
+                dcc.Link('Pie Chart', href="/pie-chart", className='el'),
+                dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+            ],className='listInside')
+        ],
+        className='col-3 listContainer bg-light'),
+        html.Div([
+            html.Div([
+                html.Div('Line Chart', className='title'),
+                dcc.Link('Home Page', href="/"),
+            ], className='fl'),
+            html.Div([
+                 html.Span('Description:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('When using?:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('Type of Charts:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+             html.Div([
+            html.Div('Type 1:', className='col-1 line-chart'),
+            html.Div(
+                dcc.Graph(figure= testFig), className='col-8'
+            )
+            ], className='row'),
+
+        ],className='col-8 matplotlib bg-light'),
+    ], className = 'row cc')
+], className='container cc')
+
+##-----------------------------------------------------
 # and this code to transfer to another link
 @app.callback(dash.dependencies.Output('page-content', 'children'),
               [dash.dependencies.Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/simple-chart':
         return simpleChart
+    elif pathname == '/line-chart':
+        return lineChart
     else:
         return main
 #     elif pathname == '/page2':
