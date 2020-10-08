@@ -4,6 +4,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+import numpy as np
 app = dash.Dash(__name__, suppress_callback_exceptions=True,
                 external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = html.Div([
@@ -12,9 +14,12 @@ app.layout = html.Div([
 ])
 
 #####
-df_test = pd.read_excel('./central_trend_2017_base.xlsx')
-t5 = df_test.head(10)
-testFig = px.line(t5, x=2020, y=2021, title='Life expectancy in Canada')
+df_pop_london = pd.read_excel('./central_trend_2017_base.xlsx')
+df_pop_london_10y_later = df_pop_london[['district', 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028,2029,2030]].query('district == "London"')
+london_y1, london_y2, london_y3, london_y4, london_y5, london_y6, london_y7, london_y8, london_y9, london_y10,london_y11  = df_pop_london_10y_later[2020].sum(),df_pop_london_10y_later[2021].sum(), df_pop_london_10y_later[2022].sum(), df_pop_london_10y_later[2023].sum(), df_pop_london_10y_later[2024].sum(), df_pop_london_10y_later[2025].sum(), df_pop_london_10y_later[2026].sum(), df_pop_london_10y_later[2027].sum(), df_pop_london_10y_later[2028].sum(), df_pop_london_10y_later[2029].sum(),df_pop_london_10y_later[2030].sum()
+arrLondonYear = np.arange(2020, 2031, 1)
+arrLondonPop = [london_y1, london_y2, london_y3, london_y4, london_y5, london_y6, london_y7, london_y8, london_y9, london_y10,london_y11]
+# London_10_year_fig = px.line( x=arrLondonYear, y=arrLondonPop,title='Population of London 10 years later')
 
 #####
 
@@ -89,14 +94,6 @@ main = html.Div([
 
     #my team
     # background
-    html.Div(style={
-        'width': '100%',
-        'height': '100%',
-        'position': 'absolute',
-        'top': '0',
-        'left': '0',
-        'z-index': '-999'
-    }, className='bg-dark')
 ], className='container mt-5')
 
 ##-----------------------------------------------------
@@ -148,16 +145,41 @@ simpleChart = html.Div([
 ], className='container cc')
 
 ##-----------------------------------------------------
+
+df = pd.DataFrame({'PDD': ['Pop','Pop','Pop','Pop','Pop','Pop','Pop','Pop','Pop','Pop','Pop',
+                                 'Birth','Birth','Birth','Birth','Birth','Birth','Birth','Birth','Birth','Birth','Birth',
+                                'Death','Death','Death','Death','Death','Death','Death','Death','Death','Death','Death'],
+                   'Units': [9121350.692, 9211390.569,9298979.218,9384393.559,9467486.975,9548200.152,9626818.38,9703526.175,9778659.789,9852408.599,9924970.291,
+                            127533.3476,127885.153,128324.9541,128801.6843,129233.04,129600.5457,129961.0983,130317.1128,130663.6129,131047.3682,131487.2486,
+                            51176.87663,51135.29448,51177.02141,51294.318,51485.16367,51803.97713,52212.18212,52673.59493,53184.19643,53741.82139,54315.44647
+],
+                   'Year':[2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,
+                             2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,
+                             2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,]})
+
+groups = df.groupby(by='PDD')
+
+data = []
+colors=['red', 'blue', 'green']
+
+for group, dataframe in groups:
+    dataframe = dataframe.sort_values(by=['Year'])
+    trace = go.Scatter(x=dataframe.Year.tolist(), 
+                       y=dataframe.Units.tolist(),
+                       marker=dict(color=colors[len(data)]),
+                       name=group)
+    data.append(trace)
+
+layout =  go.Layout(xaxis={'title': 'Year'},
+                    yaxis={'title': 'Population'},
+                    margin={'l': 40, 'b': 40, 't': 50, 'r': 50},
+                    hovermode='closest')
+
+test = go.Figure(data=data, layout=layout)  
+
+##-----------------------------------------------------
 # Line Chart Link
 lineChart = html.Div([
-     html.Div(style={
-        'width': '100%',
-        'height': '100%',
-        'position': 'absolute',
-        'top': '0',
-        'left': '0',
-        'z-index': '-999'
-    }, className='bg-dark'),
      # home page text
     html.Div('This is project of our team with Dash - plotly ', style={
         'height': '50px',
@@ -198,13 +220,30 @@ lineChart = html.Div([
                  html.Span('Type of Charts:', className='introMatplotlib'),
                 html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
             ]),
-             html.Div([
-            html.Div('Type 1:', className='col-1 line-chart'),
-            html.Div(
-                dcc.Graph(figure= testFig), className='col-8'
-            )
+            html.Div([
+                html.Div('Type 1:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= {
+                        'data' : [
+                            { 'x': arrLondonYear , 'y': arrLondonPop, 'type' : 'line', 'name' : 'Line Chart'}
+                        ] ,
+                        'layout' : {
+                            'title' : 'Population of London 10 years later',
+                            'xaxis' : { 'title': 'year'},
+                            'yaxis' : { 'title': 'population'}
+                        }
+                    }), className='col-12'
+                )
             ], className='row'),
 
+             html.Div([
+                html.Div('Type 2:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= test), className='col-12'
+                )
+            ], className='row'),
+            
+    
         ],className='col-8 matplotlib bg-light'),
     ], className = 'row cc')
 ], className='container cc')
