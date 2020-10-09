@@ -175,7 +175,7 @@ layout =  go.Layout(xaxis={'title': 'Year'},
                     margin={'l': 40, 'b': 40, 't': 50, 'r': 50},
                     hovermode='closest')
 
-test = go.Figure(data=data, layout=layout)  
+lineChartType2 = go.Figure(data=data, layout=layout)  
 
 ##-----------------------------------------------------
 # Line Chart Link
@@ -239,7 +239,7 @@ lineChart = html.Div([
              html.Div([
                 html.Div('Type 2:', className='col-3  line-chart'),
                 html.Div(
-                    dcc.Graph(figure= test), className='col-12'
+                    dcc.Graph(figure= lineChartType2), className='col-12'
                 )
             ], className='row'),
             
@@ -247,6 +247,165 @@ lineChart = html.Div([
         ],className='col-8 matplotlib bg-light'),
     ], className = 'row cc')
 ], className='container cc')
+
+##-----------------------------------------------------
+# Bar Chart Link
+df_pop_london = pd.read_excel('./central_trend_2017_base.xlsx')
+df_hackney = df_pop_london[['district', 2020]].query('district == "Hackney"')[[2020]].sum()
+df_haringey = df_pop_london[['district', 2020]].query('district == "Haringey"')[[2020]].sum()
+df_london = df_pop_london[['district', 2020]].query('district == "London"')[[2020]].sum()
+
+df_hackney_int = int(df_hackney)
+df_haringey_int = int(df_haringey)
+df_london_int = int(df_london)
+
+array_pop_city = [df_hackney_int,df_haringey_int,df_london_int]
+arr_3_city = ['Hackney','Haringey','London']
+go3city = go.Figure([go.Bar(x=arr_3_city, y=array_pop_city, marker_color=['red','green','blue'])])
+
+#type 2 chart
+df_male_london = pd.read_excel('./central_trend_2017_base.xlsx', sheet_name=1)
+df_female_london = pd.read_excel('./central_trend_2017_base.xlsx', sheet_name=2)
+
+
+df_male_london = pd.read_excel('C:/Users/84912/Downloads/central_trend_2017_base.xlsx', sheet_name=1)
+df_female_london = pd.read_excel('C:/Users/84912/Downloads/central_trend_2017_base.xlsx', sheet_name=2)
+df_bar_male = int(df_male_london[['district', 2020]].query('district == "London"')[[2020]].sum())
+df_bar_male1 = int(df_male_london[['district', 2021]].query('district == "London"')[[2021]].sum())
+df_bar_male2 = int(df_male_london[['district', 2022]].query('district == "London"')[[2022]].sum())
+df_bar_male3 = int(df_male_london[['district', 2023]].query('district == "London"')[[2023]].sum())
+df_bar_male4 = int(df_male_london[['district', 2024]].query('district == "London"')[[2024]].sum())
+df_bar_male5 = int(df_male_london[['district', 2025]].query('district == "London"')[[2025]].sum())
+df_bar_male6 = int(df_male_london[['district', 2026]].query('district == "London"')[[2026]].sum())
+df_bar_male7 = int(df_male_london[['district', 2027]].query('district == "London"')[[2027]].sum())
+df_bar_male8 = int(df_male_london[['district', 2028]].query('district == "London"')[[2028]].sum())
+df_bar_male9 = int(df_male_london[['district', 2029]].query('district == "London"')[[2029]].sum())
+df_bar_male10 = int(df_male_london[['district', 2030]].query('district == "London"')[[2030]].sum())
+df_bar_male11 = int(df_male_london[['district', 2031]].query('district == "London"')[[2031]].sum())
+
+df_bar_female = int(df_female_london[['district', 2020]].query('district == "London"')[[2020]].sum())
+df_bar_female1 = int(df_female_london[['district', 2021]].query('district == "London"')[[2021]].sum())
+df_bar_female2 = int(df_female_london[['district', 2022]].query('district == "London"')[[2022]].sum())
+df_bar_female3 = int(df_female_london[['district', 2023]].query('district == "London"')[[2023]].sum())
+df_bar_female4 = int(df_female_london[['district', 2024]].query('district == "London"')[[2024]].sum())
+df_bar_female5 = int(df_female_london[['district', 2025]].query('district == "London"')[[2025]].sum())
+df_bar_female6 = int(df_female_london[['district', 2026]].query('district == "London"')[[2026]].sum())
+df_bar_female7 = int(df_female_london[['district', 2027]].query('district == "London"')[[2027]].sum())
+df_bar_female8 = int(df_female_london[['district', 2028]].query('district == "London"')[[2028]].sum())
+df_bar_female9 = int(df_female_london[['district', 2029]].query('district == "London"')[[2029]].sum())
+df_bar_female10 = int(df_female_london[['district', 2030]].query('district == "London"')[[2030]].sum())
+df_bar_female11 = int(df_female_london[['district', 2031]].query('district == "London"')[[2031]].sum())
+years = np.arange(2020, 2032, 1)
+arr_bar_male = [
+    df_bar_male1, df_bar_male2, df_bar_male3,
+    df_bar_male4, df_bar_male5, df_bar_male6,
+    df_bar_male7, df_bar_male8, df_bar_male9, df_bar_male10,df_bar_male11
+]
+arr_bar_female= [
+      df_bar_female1, df_bar_female2, df_bar_female3,
+    df_bar_female4, df_bar_female5, df_bar_female6,
+    df_bar_female7, df_bar_female8, df_bar_female9, df_bar_female10,df_bar_male11
+]
+
+bar_type2_fig = go.Figure()
+bar_type2_fig.add_trace(go.Bar(x=years,
+                y=arr_bar_male,
+                name='Male',
+                marker_color='rgb(55, 83, 109)'
+                ))
+bar_type2_fig.add_trace(go.Bar(x=years,
+                y=arr_bar_female,
+                name='Female',
+                marker_color='rgb(26, 118, 255)'
+                ))
+
+bar_type2_fig.update_layout(
+    title='Compare Male and female in london',
+    xaxis_tickfont_size=14,
+    xaxis = dict(
+         title='Years',
+        titlefont_size=16,
+        tickfont_size=14,
+    ),
+    yaxis=dict(
+        title='pop (population)',
+        titlefont_size=16,
+        tickfont_size=14,
+        range=[4000000,5000000]
+    ),
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.2, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.15, # gap between bars of the same location coordinate.
+    height= 700
+)
+
+#---------------------------------------------
+barChart = html.Div([
+     # home page text
+    html.Div('This is project of our team with Dash - plotly ', style={
+        'height': '50px',
+        'width': '100%',
+        'backgroundColor': '#f5f5f5',
+        'paddingLeft': '25px',
+        'position': 'absolute',
+        'top': '0',
+        'left': '0',
+        'display': 'flex',
+        'alignItems': 'center'
+    }),
+    html.Div([
+        html.Div([
+            html.Ul([
+                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Line Chart', href="/line-chart", className='el'),
+                dcc.Link('Bar Chart', href="/bar-chart", className='el'),
+                dcc.Link('Pie Chart', href="/pie-chart", className='el'),
+                dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+            ],className='listInside')
+        ],
+        className='col-3 listContainer bg-light'),
+        html.Div([
+            html.Div([
+                html.Div('Bar Chart', className='title'),
+                dcc.Link('Home Page', href="/"),
+            ], className='fl'),
+            html.Div([
+                 html.Span('Description:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('When using?:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('Type of Charts:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                html.Div('Type 1:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= go3city), className='col-12'
+                )
+            ], className='row'),
+
+             html.Div([
+                html.Div('Type 2:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= bar_type2_fig), className='col-12'
+                )
+            ], className='row'),
+            
+    
+        ],className='col-8 matplotlib bg-light'),
+    ], className = 'row cc')
+], className='container cc')
+
 
 ##-----------------------------------------------------
 # and this code to transfer to another link
@@ -257,6 +416,8 @@ def display_page(pathname):
         return simpleChart
     elif pathname == '/line-chart':
         return lineChart
+    elif pathname =='/bar-chart':
+        return barChart
     else:
         return main
 #     elif pathname == '/page2':
