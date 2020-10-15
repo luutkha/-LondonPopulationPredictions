@@ -250,7 +250,6 @@ lineChart = html.Div([
 
 ##-----------------------------------------------------
 # Bar Chart Link
-df_pop_london = pd.read_excel('./central_trend_2017_base.xlsx')
 df_hackney = df_pop_london[['district', 2020]].query('district == "Hackney"')[[2020]].sum()
 df_haringey = df_pop_london[['district', 2020]].query('district == "Haringey"')[[2020]].sum()
 df_london = df_pop_london[['district', 2020]].query('district == "London"')[[2020]].sum()
@@ -304,7 +303,7 @@ arr_bar_male = [
 arr_bar_female= [
       df_bar_female1, df_bar_female2, df_bar_female3,
     df_bar_female4, df_bar_female5, df_bar_female6,
-    df_bar_female7, df_bar_female8, df_bar_female9, df_bar_female10,df_bar_male11
+    df_bar_female7, df_bar_female8, df_bar_female9, df_bar_female10,df_bar_female11
 ]
 
 bar_type2_fig = go.Figure()
@@ -408,6 +407,102 @@ barChart = html.Div([
 
 
 ##-----------------------------------------------------
+## pie chart draw
+##
+df_compareAge2020_Pie_u18 = int(df_pop_london[['district', 'age',2020]].query('district == "London" and age < 18')[2020].sum())
+df_compareAge2020_Pie_u60 = int(df_pop_london[['district', 'age',2020]].query('district == "London" and age < 60 and age >=18 ')[2020].sum())
+df_compareAge2020_Pie_u90 = int( df_pop_london[['district', 'age',2020]].query('district == "London"and age < 90 and age >=60 ')[2020].sum())
+
+pieType1Fig = px.pie(values=[df_compareAge2020_Pie_u18, df_compareAge2020_Pie_u60,df_compareAge2020_Pie_u90], names=['Trẻ em & vị thành niên', 'Người trưởng thành', 'người lớn tuổi'], title='Biểu đồ so sánh dân số 3 độ tuổi của thành phố london trong năm 2020 ')
+
+
+
+
+df_pop_westminster_2020  = int(df_pop_london[['district', 2020]].query('district == "Westminster"')[[2020]].sum())
+df_pop_london_2020  = int(df_pop_london[['district', 2020]].query('district == "London"')[[2020]].sum())
+df_pop_wandsworth_2020  = int(df_pop_london[['district', 2020]].query('district == "Wandsworth"')[[2020]].sum())
+df_pop_towerHamlets_2020  = int(df_pop_london[['district', 2020]].query('district == "Tower Hamlets"')[[2020]].sum())
+df_pop_havering_2020  = int(df_pop_london[['district', 2020]].query('district == "Havering"')[[2020]].sum())
+df_pop_waltham_2020  = int(df_pop_london[['district', 2020]].query('district == "Waltham Forest"')[[2020]].sum())
+df_pop_hillingdon_2020  = int(df_pop_london[['district', 2020]].query('district == "Hillingdon"')[[2020]].sum())
+df_pop_harrow_2020  = int(df_pop_london[['district', 2020]].query('district == "Harrow"')[[2020]].sum())
+
+labels = ['Westminster','London','Wandsworth','Tower Hamlets','Havering','Waltham Forest','Hillingdon','Harrow']
+values = [df_pop_westminster_2020, df_pop_london_2020, df_pop_wandsworth_2020, df_pop_towerHamlets_2020,df_pop_havering_2020,
+         df_pop_waltham_2020,df_pop_waltham_2020,df_pop_hillingdon_2020,df_pop_harrow_2020]
+
+# Use `hole` to create a donut-like pie chart
+compare_8_city_pie = go.Figure(data=[go.Pie(labels=labels, values=values,title='population' , hole=.5, pull=[0, 0.2, 0, 0,0])])
+compare_8_city_pie.update_layout(
+    title_text="So sánh các thành phố xung quanh london",
+    # Add annotations in the center of the donut pies.
+    )
+##-----------------------------------------------------
+## pie chart
+##
+pieChart = html.Div([
+     # home page text
+    html.Div('This is project of our team with Dash - plotly ', style={
+        'height': '50px',
+        'width': '100%',
+        'backgroundColor': '#f5f5f5',
+        'paddingLeft': '25px',
+        'position': 'absolute',
+        'top': '0',
+        'left': '0',
+        'display': 'flex',
+        'alignItems': 'center'
+    }),
+    html.Div([
+        html.Div([
+            html.Ul([
+                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Line Chart', href="/line-chart", className='el'),
+                dcc.Link('Bar Chart', href="/bar-chart", className='el'),
+                dcc.Link('Pie Chart', href="/pie-chart", className='el'),
+                dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+            ],className='listInside')
+        ],
+        className='col-3 listContainer bg-light'),
+        html.Div([
+            html.Div([
+                html.Div('Pie Chart', className='title'),
+                dcc.Link('Home Page', href="/"),
+            ], className='fl'),
+            html.Div([
+                 html.Span('Description:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('When using?:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('Type of Charts:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                html.Div('Type 1:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= pieType1Fig), className='col-12'
+                )
+            ], className='row'),
+
+             html.Div([
+                html.Div('Type 2:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= compare_8_city_pie), className='col-12'
+                )
+            ], className='row'),
+            
+    
+        ],className='col-8 matplotlib bg-light'),
+    ], className = 'row cc')
+], className='container cc')
+
+
+
+##-----------------------------------------------------
 # and this code to transfer to another link
 @app.callback(dash.dependencies.Output('page-content', 'children'),
               [dash.dependencies.Input('url', 'pathname')])
@@ -418,6 +513,8 @@ def display_page(pathname):
         return lineChart
     elif pathname =='/bar-chart':
         return barChart
+    elif pathname =='/pie-chart':
+        return pieChart
     else:
         return main
 #     elif pathname == '/page2':
