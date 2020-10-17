@@ -252,11 +252,10 @@ lineChart = html.Div([
 # Bar Chart Link
 df_hackney = df_pop_london[['district', 2020]].query('district == "Hackney"')[[2020]].sum()
 df_haringey = df_pop_london[['district', 2020]].query('district == "Haringey"')[[2020]].sum()
-df_london = df_pop_london[['district', 2020]].query('district == "London"')[[2020]].sum()
 
 df_hackney_int = int(df_hackney)
 df_haringey_int = int(df_haringey)
-df_london_int = int(df_london)
+df_london_int = int(df_pop_london[['district', 2020]].query('district == "London"')[[2020]].sum())
 
 array_pop_city = [df_hackney_int,df_haringey_int,df_london_int]
 arr_3_city = ['Hackney','Haringey','London']
@@ -343,6 +342,7 @@ bar_type2_fig.update_layout(
     bargroupgap=0.15, # gap between bars of the same location coordinate.
     height= 700
 )
+
 
 #---------------------------------------------
 barChart = html.Div([
@@ -500,6 +500,163 @@ pieChart = html.Div([
     ], className = 'row cc')
 ], className='container cc')
 
+##______________________________________________________
+##scatter charts
+
+df_scatter_citylondon = int(df_pop_london[['district', 2020]].query('district == "City of London"')[[2020]].sum())
+df_scatter_BaD = int(df_pop_london[['district', 2020]].query('district == "Barking and Dagenham"')[[2020]].sum())
+df_scatter_barnet = int(df_pop_london[['district', 2020]].query('district == "Barnet"')[[2020]].sum())
+df_scatter_Bexley = int(df_pop_london[['district', 2020]].query('district == "Bexley"')[[2020]].sum())
+df_scatter_Brent = int(df_pop_london[['district', 2020]].query('district == "Brent"')[[2020]].sum())
+df_scatter_Bromley = int(df_pop_london[['district', 2020]].query('district == "Bromley"')[[2020]].sum())
+df_scatter_Camden = int(df_pop_london[['district', 2020]].query('district == "Camden"')[[2020]].sum())
+df_scatter_Croydon = int(df_pop_london[['district', 2020]].query('district == "Croydon"')[[2020]].sum())
+df_scatter_Ealing = int(df_pop_london[['district', 2020]].query('district == "Ealing"')[[2020]].sum())
+df_scatter_Enfield = int(df_pop_london[['district', 2020]].query('district == "Enfield"')[[2020]].sum())
+df_scatter_Greenwich = int(df_pop_london[['district', 2020]].query('district == "Greenwich"')[[2020]].sum())
+df_scatter_Hammer = int(df_pop_london[['district', 2020]].query('district == "Hammersmith and Fulham"')[[2020]].sum())
+df_scatter_Haringey = int(df_pop_london[['district', 2020]].query('district == "Haringey"')[[2020]].sum())
+df_scatter_Harrow = int(df_pop_london[['district', 2020]].query('district == "Harrow"')[[2020]].sum())
+df_scatter_Havering = int(df_pop_london[['district', 2020]].query('district == "Havering"')[[2020]].sum())
+df_scatter_Hillingdon = int(df_pop_london[['district', 2020]].query('district == "Hillingdon"')[[2020]].sum())
+df_scatter_Hounslow = int(df_pop_london[['district', 2020]].query('district == "Hounslow"')[[2020]].sum())
+df_scatter_Islington = int(df_pop_london[['district', 2020]].query('district == "Islington"')[[2020]].sum())
+df_scatter_Kensington = int(df_pop_london[['district', 2020]].query('district == "Kensington and Chelsea"')[[2020]].sum())
+df_scatter_Kingston = int(df_pop_london[['district', 2020]].query('district == "Kingston upon Thames"')[[2020]].sum())
+df_scatter_Lambeth = int(df_pop_london[['district', 2020]].query('district == "Lambeth"')[[2020]].sum())
+df_scatter_Lewisham = int(df_pop_london[['district', 2020]].query('district == "Lewisham"')[[2020]].sum())
+df_scatter_Merton = int(df_pop_london[['district', 2020]].query('district == "Merton"')[[2020]].sum())
+df_scatter_Newham = int(df_pop_london[['district', 2020]].query('district == "Newham"')[[2020]].sum())
+df_scatter_Redbridge = int(df_pop_london[['district', 2020]].query('district == "Redbridge"')[[2020]].sum())
+df_scatter_Richmond = int(df_pop_london[['district', 2020]].query('district == "Richmond upon Thames"')[[2020]].sum())
+df_scatter_Southwark = int(df_pop_london[['district', 2020]].query('district == "Southwark"')[[2020]].sum())
+df_scatter_Hamlets = int(df_pop_london[['district', 2020]].query('district == "Tower Hamlets"')[[2020]].sum())
+df_scatter_Sutton = int(df_pop_london[['district', 2020]].query('district == "Sutton"')[[2020]].sum())
+df_scatter_Waltham = int(df_pop_london[['district', 2020]].query('district == "Waltham Forest"')[[2020]].sum())
+df_scatter_Wandsworth = int(df_pop_london[['district', 2020]].query('district == "Wandsworth"')[[2020]].sum())
+df_scatter_Westminster = int(df_pop_london[['district', 2020]].query('district == "Westminster"')[[2020]].sum())
+df_scatter_London = int(df_pop_london[['district', 2020]].query('district == "London"')[[2020]].sum())
+yScatter_withoutLondon = [ df_scatter_citylondon, df_scatter_BaD,df_scatter_barnet,
+          df_scatter_Bexley, df_scatter_Brent, df_scatter_Bromley, df_scatter_Camden, df_scatter_Croydon, 
+           df_scatter_Ealing , df_scatter_Enfield, df_scatter_Greenwich, df_scatter_Hammer, df_scatter_Haringey,df_scatter_Harrow , 
+            df_scatter_Havering, df_scatter_Hillingdon, df_scatter_Hounslow,df_scatter_Islington ,df_scatter_Kensington , df_scatter_Kingston,
+            df_scatter_Lambeth, df_scatter_Lewisham,df_scatter_Merton ,df_scatter_Newham , df_scatter_Redbridge, df_scatter_Richmond,df_scatter_Southwark ,
+           df_scatter_Hamlets , df_scatter_Sutton, df_scatter_Waltham,df_scatter_Wandsworth , df_scatter_Westminster, 
+           ]
+
+scatterWithoutLondon = go.Figure(data=go.Scatter(x=['City of London','Barking and Dagenham','Barnet','Bexley','Brent','Bromley','Camden',
+                                   'Croydon','Ealing','Enfield','Greenwich','Hammersmith and Fulham','Haringey','Harrow','Havering',
+                                   'Hillingdon','Hounslow','Islington','Kensington and Chelsea','Kingston upon Thames','Lambeth',
+                                   'Lewisham','Merton',
+                                  'Newham','Redbridge','Richmond upon Thames','Southwark','Tower Hamlets','Sutton'
+                                   ,'Waltham Forest','Wandsworth','Westminster'],
+                                y=yScatter_withoutLondon,
+                                mode='markers',
+                                marker_color=yScatter_withoutLondon,
+                                marker=dict(
+        size=16,
+        color=np.random.randn(500), #set color equal to a variable
+        colorscale='Viridis', # one of plotly colorscales
+        showscale=True
+    ),
+                                
+                                text=['City of London','Barking and Dagenham','Barnet','Bexley','Brent','Bromley','Camden',
+                                   'Croydon','Ealing','Enfield','Greenwich','Hammersmith and Fulham','Haringey','Harrow','Havering',
+                                   'Hillingdon','Hounslow','Islington','Kensington and Chelsea','Kingston upon Thames','Lambeth',
+                                   'Lewisham','Merton',
+                                  'Newham','Redbridge','Richmond upon Thames','Southwark','Tower Hamlets','Sutton'
+                                   ,'Waltham Forest','Wandsworth','Westminster'])) # hover text goes here
+
+scatterWithoutLondon.update_layout(title='Dân số tất cả thành phố trừ London')
+
+yScatter_HaveLondon = [ df_scatter_citylondon, df_scatter_BaD,df_scatter_barnet,
+          df_scatter_Bexley, df_scatter_Brent, df_scatter_Bromley, df_scatter_Camden, df_scatter_Croydon, 
+           df_scatter_Ealing , df_scatter_Enfield, df_scatter_Greenwich, df_scatter_Hammer, df_scatter_Haringey,df_scatter_Harrow , 
+            df_scatter_Havering, df_scatter_Hillingdon, df_scatter_Hounslow,df_scatter_Islington ,df_scatter_Kensington , df_scatter_Kingston,
+            df_scatter_Lambeth, df_scatter_Lewisham,df_scatter_Merton ,df_scatter_Newham , df_scatter_Redbridge, df_scatter_Richmond,df_scatter_Southwark ,
+           df_scatter_Hamlets , df_scatter_Sutton, df_scatter_Waltham,df_scatter_Wandsworth , df_scatter_Westminster, df_scatter_London
+           ]
+
+yScatter_HaveLondon = go.Figure(data=go.Scatter(x=['City of London','Barking and Dagenham','Barnet','Bexley','Brent','Bromley','Camden',
+                                   'Croydon','Ealing','Enfield','Greenwich','Hammersmith and Fulham','Haringey','Harrow','Havering',
+                                   'Hillingdon','Hounslow','Islington','Kensington and Chelsea','Kingston upon Thames','Lambeth',
+                                   'Lewisham','Merton',
+                                  'Newham','Redbridge','Richmond upon Thames','Southwark','Tower Hamlets','Sutton'
+                                   ,'Waltham Forest','Wandsworth','Westminster','london'],
+                                y=yScatter_HaveLondon,
+                                mode='markers',
+                                marker_color=yScatter_HaveLondon,                              
+                                text=['City of London','Barking and Dagenham','Barnet','Bexley','Brent','Bromley','Camden',
+                                   'Croydon','Ealing','Enfield','Greenwich','Hammersmith and Fulham','Haringey','Harrow','Havering',
+                                   'Hillingdon','Hounslow','Islington','Kensington and Chelsea','Kingston upon Thames','Lambeth',
+                                   'Lewisham','Merton',
+                                  'Newham','Redbridge','Richmond upon Thames','Southwark','Tower Hamlets','Sutton'
+                                   ,'Waltham Forest','Wandsworth','Westminster','london'])) # hover text goes here
+
+yScatter_HaveLondon.update_layout(title='Dân số tất cả thành phố')
+
+
+
+##-------------------------
+scatterChart = html.Div([
+     # home page text
+    html.Div('This is project of our team with Dash - plotly ', style={
+        'height': '50px',
+        'width': '100%',
+        'backgroundColor': '#f5f5f5',
+        'paddingLeft': '25px',
+        'position': 'absolute',
+        'top': '0',
+        'left': '0',
+        'display': 'flex',
+        'alignItems': 'center'
+    }),
+    html.Div([
+        html.Div([
+            html.Ul([
+                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Line Chart', href="/line-chart", className='el'),
+                dcc.Link('Bar Chart', href="/bar-chart", className='el'),
+                dcc.Link('Pie Chart', href="/pie-chart", className='el'),
+                dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+            ],className='listInside')
+        ],
+        className='col-3 listContainer bg-light'),
+        html.Div([
+            html.Div([
+                html.Div('Scatter chart', className='title'),
+                dcc.Link('Home Page', href="/"),
+            ], className='fl'),
+            html.Div([
+                 html.Span('Description:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('When using?:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('Type of Charts:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                html.Div('Type 1:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= scatterWithoutLondon), className='col-12'
+                )
+            ], className='row'),
+
+             html.Div([
+                html.Div('Type 2:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= yScatter_HaveLondon), className='col-12'
+                )
+            ], className='row'),
+            
+    
+        ],className='col-8 matplotlib bg-light'),
+    ], className = 'row cc')
+], className='container cc')
 
 
 ##-----------------------------------------------------
@@ -515,6 +672,8 @@ def display_page(pathname):
         return barChart
     elif pathname =='/pie-chart':
         return pieChart
+    elif pathname =='/scatter-chart':
+        return scatterChart
     else:
         return main
 #     elif pathname == '/page2':
