@@ -127,6 +127,7 @@ simpleChart = html.Div([
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
                 dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+                dcc.Link('Dot Chart', href="/dot-chart", className='el'),
             ],className='listInside')
         ],
         className='col-3 listContainer bg-light'),
@@ -200,6 +201,7 @@ lineChart = html.Div([
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
                 dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+                  dcc.Link('Dot Chart', href="/dot-chart", className='el'),
             ],className='listInside')
         ],
         className='col-3 listContainer bg-light'),
@@ -366,6 +368,7 @@ barChart = html.Div([
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
                 dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+                  dcc.Link('Dot Chart', href="/dot-chart", className='el'),
             ],className='listInside')
         ],
         className='col-3 listContainer bg-light'),
@@ -461,6 +464,7 @@ pieChart = html.Div([
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
                 dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+                  dcc.Link('Dot Chart', href="/dot-chart", className='el'),
             ],className='listInside')
         ],
         className='col-3 listContainer bg-light'),
@@ -619,6 +623,7 @@ scatterChart = html.Div([
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
                 dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+                  dcc.Link('Dot Chart', href="/dot-chart", className='el'),
             ],className='listInside')
         ],
         className='col-3 listContainer bg-light'),
@@ -660,6 +665,160 @@ scatterChart = html.Div([
 
 
 ##-----------------------------------------------------
+##dot chart
+
+
+u18_dot_2020 = int(df_pop_london[['district', 'age',2020]].query('district == "London" and age < 18')[2020].sum())
+u18_dot_2021 = int(df_pop_london[['district', 'age',2021]].query('district == "London" and age < 18')[2021].sum())
+u18_dot_2022 = int(df_pop_london[['district', 'age',2022]].query('district == "London" and age < 18')[2022].sum())
+u18_dot_2023 = int(df_pop_london[['district', 'age',2023]].query('district == "London" and age < 18')[2023].sum())
+u18_dot_2024 = int(df_pop_london[['district', 'age',2024]].query('district == "London" and age < 18')[2024].sum())
+u18_dot_2025 = int(df_pop_london[['district', 'age',2025]].query('district == "London" and age < 18')[2025].sum())
+u18_dot_2026 = int(df_pop_london[['district', 'age',2026]].query('district == "London" and age < 18')[2026].sum())
+u18_dot_2027 = int(df_pop_london[['district', 'age',2027]].query('district == "London" and age < 18')[2027].sum())
+u18_dot_2028 = int(df_pop_london[['district', 'age',2028]].query('district == "London" and age < 18')[2028].sum())
+u18_dot_2029 = int(df_pop_london[['district', 'age',2029]].query('district == "London" and age < 18')[2029].sum())
+u18_dot_2030 = int(df_pop_london[['district', 'age',2030]].query('district == "London" and age < 18')[2030].sum())
+u18_dot_2031 = int(df_pop_london[['district', 'age',2031]].query('district == "London" and age < 18')[2031].sum())
+
+u60_dot_2020 = int(df_pop_london[['district', 'age',2020]].query('district == "London" and age < 60 and age >=18 ')[2020].sum())
+u60_dot_2021 = int(df_pop_london[['district', 'age',2021]].query('district == "London" and age < 60 and age >=18 ')[2021].sum())
+u60_dot_2022 = int(df_pop_london[['district', 'age',2022]].query('district == "London" and age < 60 and age >=18 ')[2022].sum())
+u60_dot_2023 = int(df_pop_london[['district', 'age',2023]].query('district == "London" and age < 60 and age >=18 ')[2023].sum())
+u60_dot_2024 = int(df_pop_london[['district', 'age',2024]].query('district == "London" and age < 60 and age >=18 ')[2024].sum())
+u60_dot_2025 = int(df_pop_london[['district', 'age',2025]].query('district == "London" and age < 60 and age >=18 ')[2025].sum())
+u60_dot_2026 = int(df_pop_london[['district', 'age',2026]].query('district == "London" and age < 60 and age >=18 ')[2026].sum())
+u60_dot_2027 = int(df_pop_london[['district', 'age',2027]].query('district == "London" and age < 60 and age >=18 ')[2027].sum())
+u60_dot_2028 = int(df_pop_london[['district', 'age',2028]].query('district == "London" and age < 60 and age >=18 ')[2028].sum())
+u60_dot_2029 = int(df_pop_london[['district', 'age',2029]].query('district == "London" and age < 60 and age >=18 ')[2029].sum())
+u60_dot_2030 = int(df_pop_london[['district', 'age',2030]].query('district == "London" and age < 60 and age >=18 ')[2030].sum())
+u60_dot_2031 = int(df_pop_london[['district', 'age',2031]].query('district == "London" and age < 60 and age >=18 ')[2031].sum())
+
+
+u90_dot_2020 = int( df_pop_london[['district', 'age',2020]].query('district == "London"and age < 90 and age >=60 ')[2020].sum())
+u90_dot_2021 = int( df_pop_london[['district', 'age',2021]].query('district == "London"and age < 90 and age >=60 ')[2021].sum())
+u90_dot_2022 = int( df_pop_london[['district', 'age',2022]].query('district == "London"and age < 90 and age >=60 ')[2022].sum())
+u90_dot_2023 = int( df_pop_london[['district', 'age',2023]].query('district == "London"and age < 90 and age >=60 ')[2023].sum())
+u90_dot_2024 = int( df_pop_london[['district', 'age',2024]].query('district == "London"and age < 90 and age >=60 ')[2024].sum())
+u90_dot_2025 = int( df_pop_london[['district', 'age',2025]].query('district == "London"and age < 90 and age >=60 ')[2025].sum())
+u90_dot_2026 = int( df_pop_london[['district', 'age',2026]].query('district == "London"and age < 90 and age >=60 ')[2026].sum())
+u90_dot_2027 = int( df_pop_london[['district', 'age',2027]].query('district == "London"and age < 90 and age >=60 ')[2027].sum())
+u90_dot_2028 = int( df_pop_london[['district', 'age',2028]].query('district == "London"and age < 90 and age >=60 ')[2028].sum())
+u90_dot_2029 = int( df_pop_london[['district', 'age',2029]].query('district == "London"and age < 90 and age >=60 ')[2029].sum())
+u90_dot_2030 = int( df_pop_london[['district', 'age',2030]].query('district == "London"and age < 90 and age >=60 ')[2030].sum())
+u90_dot_2031 = int( df_pop_london[['district', 'age',2031]].query('district == "London"and age < 90 and age >=60 ')[2031].sum())
+
+u18_array_dot = [u18_dot_2020,u18_dot_2021,u18_dot_2022,
+                u18_dot_2023,u18_dot_2024,u18_dot_2025,
+                u18_dot_2026,u18_dot_2027,u18_dot_2028,
+                u18_dot_2029,u18_dot_2030,u18_dot_2031]
+
+u60_array_dot = [u60_dot_2020,u60_dot_2021,u60_dot_2022,
+                u60_dot_2023,u60_dot_2024,u60_dot_2025,
+                u60_dot_2026,u60_dot_2027,u60_dot_2028,
+                u60_dot_2029,u60_dot_2030,u60_dot_2031]
+
+u90_array_dot = [u90_dot_2020,u90_dot_2021,u90_dot_2022,
+                u90_dot_2023,u90_dot_2024,u90_dot_2025,
+                u90_dot_2026,u90_dot_2027,u90_dot_2028,
+                u90_dot_2029,u90_dot_2030,u90_dot_2031]
+
+
+schools = np.arange(2020, 2032, 1)
+
+
+dot_chart_1_fig = go.Figure()
+dot_chart_1_fig.add_trace(go.Scatter(
+    x=u18_array_dot,
+    y=schools,
+    marker=dict(color="crimson", size=12),
+    mode="markers",
+    name="dưới 18 tuổi",
+))
+
+dot_chart_1_fig.add_trace(go.Scatter(
+    x=u60_array_dot,
+    y=schools,
+    marker=dict(color="gold", size=12),
+    mode="markers",
+    name="từ 18 tới 59 tuổi",
+))
+dot_chart_1_fig.add_trace(go.Scatter(
+    x=u90_array_dot,
+    y=schools,
+    marker=dict(color="green", size=12),
+    mode="markers",
+    name="từ 60 tới 80 tuổi",
+))
+dot_chart_1_fig.update_layout(title="Biểu đồ dự đoán 3 lứa tuổi của thành phố london trong 10 năm sau",
+                  xaxis_title="population",
+                  yaxis_title="years")
+
+#------------------------------------------------------
+dotChart = html.Div([
+     # home page text
+    html.Div('This is project of our team with Dash - plotly ', style={
+        'height': '50px',
+        'width': '100%',
+        'backgroundColor': '#f5f5f5',
+        'paddingLeft': '25px',
+        'position': 'absolute',
+        'top': '0',
+        'left': '0',
+        'display': 'flex',
+        'alignItems': 'center'
+    }),
+    html.Div([
+        html.Div([
+            html.Ul([
+                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Line Chart', href="/line-chart", className='el'),
+                dcc.Link('Bar Chart', href="/bar-chart", className='el'),
+                dcc.Link('Pie Chart', href="/pie-chart", className='el'),
+                dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
+                dcc.Link('Dot Chart', href="/dot-chart", className='el'),
+            ],className='listInside')
+        ],
+        className='col-3 listContainer bg-light'),
+        html.Div([
+            html.Div([
+                html.Div('Dot chart', className='title'),
+                dcc.Link('Home Page', href="/"),
+            ], className='fl'),
+            html.Div([
+                 html.Span('Description:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('When using?:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                 html.Span('Type of Charts:', className='introMatplotlib'),
+                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+            ]),
+            html.Div([
+                html.Div('Type 1:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= dot_chart_1_fig), className='col-12'
+                )
+            ], className='row'),
+
+             html.Div([
+                html.Div('Type 2:', className='col-3  line-chart'),
+                html.Div(
+                    dcc.Graph(figure= yScatter_HaveLondon), className='col-12'
+                )
+            ], className='row'),  
+        ],className='col-8 matplotlib bg-light'),
+    ], className = 'row cc')
+], className='container cc')
+
+
+
+
+
+##---------------------------------------------------------
 # and this code to transfer to another link
 @app.callback(dash.dependencies.Output('page-content', 'children'),
               [dash.dependencies.Input('url', 'pathname')])
@@ -674,6 +833,8 @@ def display_page(pathname):
         return pieChart
     elif pathname =='/scatter-chart':
         return scatterChart
+    elif pathname =='/dot-chart':
+        return dotChart
     else:
         return main
 #     elif pathname == '/page2':
