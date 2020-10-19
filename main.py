@@ -58,12 +58,15 @@ main = html.Div([
     # introduce tag
     html.Div([
         html.Div([
-            html.Div('Introducing to project:', style={
+            html.Div('Giới thiệu về project: ', style={
                 'fontSize': '25px',
                 'fontWeight': 'bold',
             }),
             html.Div([
-                html.Div( 'this is my project this is my project this is my project this is my project this is my project this is my project this is my project this is my project this is my project ',className='col-8'),
+                html.Div( [
+                    html.Div('- London population prediction (Dự đoán dân số london): nghiên cứu và dự đoán về sự gia tăng dân số của thành phố London (Anh - UK) cùng các vấn đề về dân số liên quan khác trong tương lai gần.'),
+                    html.Div('- Project này sử dụng Framework Dash - Plotly để xây dựng và dữ liệu được lấy từ trang data.world để phân tích')
+                ],className='col-8'),
                 html.Img(src='./assets/pop.jpg', className='col-4')
 
             ], className='row', style={ 'fontSize': '15px' })
@@ -122,7 +125,7 @@ simpleChart = html.Div([
     html.Div([
         html.Div([
             html.Ul([
-                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Dash Plotly', href="/simple-chart", className='el'),
                 dcc.Link('Line Chart', href="/line-chart", className='el'),
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
@@ -133,12 +136,12 @@ simpleChart = html.Div([
         className='col-3 listContainer bg-light'),
         html.Div([
             html.Div([
-                html.Div('Matplotlib', className='title'),
+                html.Div('Dash - plotly', className='title'),
                 dcc.Link('Home Page', href="/"),
             ], className='fl'),
             html.Div([
-                 html.Span('Introducing to matplotlib:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Giới thiệu về Dash - Plotly:', className='introMatplotlib'),
+                html.Span('Dash là một framework mã nguồn mở dành cho xây dựng ứng dụng phân tích dữ liệu mà không cần đến Ngôn ngữ JavaScript, và nó được tích hợp với thi viện Plotly - một thư viện đồ họa. ',className='content')
             ])
            
         ],className='col-8 matplotlib bg-light'),
@@ -196,7 +199,7 @@ lineChart = html.Div([
     html.Div([
         html.Div([
             html.Ul([
-                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Dash Plotly', href="/simple-chart", className='el'),
                 dcc.Link('Line Chart', href="/line-chart", className='el'),
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
@@ -211,16 +214,15 @@ lineChart = html.Div([
                 dcc.Link('Home Page', href="/"),
             ], className='fl'),
             html.Div([
-                 html.Span('Description:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Mô tả:', className='introMatplotlib'),
+                html.Span('Đây là dạng biểu đồ để thể hiện tiến trình phát triển, động thái phát triển của một đối tượng hay một nhóm đối tượng nào đó qua thời gian. Vì vậy với các bài vẽ biểu đồ đường thường có các cụm từ thể hiện sự phát triển, tốc độ tăng trưởng… với các mốc thời gian nhất định. ',className='content')
             ]),
             html.Div([
-                 html.Span('When using?:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Sử dụng khi nào?:', className='introMatplotlib'),
+                html.Span('Line chart (biểu đồ đường): được sử dụng khi dữ liệu được mô tả phụ thuộc vào thời gian với trục hoành biểu diễn thời gian và trục tung biểu diễn đại lượng.',className='content')
             ]),
             html.Div([
-                 html.Span('Type of Charts:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Type of Charts:', className='introMatplotlib')
             ]),
             html.Div([
                 html.Div('Type 1:', className='col-3  line-chart'),
@@ -297,12 +299,12 @@ df_bar_female10 = int(df_female_london[['district', 2030]].query('district == "L
 df_bar_female11 = int(df_female_london[['district', 2031]].query('district == "London"')[[2031]].sum())
 years = np.arange(2020, 2032, 1)
 arr_bar_male = [
-    df_bar_male1, df_bar_male2, df_bar_male3,
+    df_bar_male,df_bar_male1, df_bar_male2, df_bar_male3,
     df_bar_male4, df_bar_male5, df_bar_male6,
     df_bar_male7, df_bar_male8, df_bar_male9, df_bar_male10,df_bar_male11
 ]
 arr_bar_female= [
-      df_bar_female1, df_bar_female2, df_bar_female3,
+      df_bar_female,df_bar_female1, df_bar_female2, df_bar_female3,
     df_bar_female4, df_bar_female5, df_bar_female6,
     df_bar_female7, df_bar_female8, df_bar_female9, df_bar_female10,df_bar_female11
 ]
@@ -310,17 +312,17 @@ arr_bar_female= [
 bar_type2_fig = go.Figure()
 bar_type2_fig.add_trace(go.Bar(x=years,
                 y=arr_bar_male,
-                name='Male',
+                name='Nam',
                 marker_color='rgb(55, 83, 109)'
                 ))
 bar_type2_fig.add_trace(go.Bar(x=years,
                 y=arr_bar_female,
-                name='Female',
+                name='Nữ',
                 marker_color='rgb(26, 118, 255)'
                 ))
 
 bar_type2_fig.update_layout(
-    title='Compare Male and female in london',
+    title='So sánh dân sô giữa nam và nữ của thành phố London',
     xaxis_tickfont_size=14,
     xaxis = dict(
          title='Years',
@@ -363,7 +365,7 @@ barChart = html.Div([
     html.Div([
         html.Div([
             html.Ul([
-                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Dash Plotly', href="/simple-chart", className='el'),
                 dcc.Link('Line Chart', href="/line-chart", className='el'),
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
@@ -378,16 +380,15 @@ barChart = html.Div([
                 dcc.Link('Home Page', href="/"),
             ], className='fl'),
             html.Div([
-                 html.Span('Description:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Mô tả:', className='introMatplotlib'),
+                html.Span('Dạng biểu đồ này được thể hiện động thái phát triển, so sánh tương quan về độ lớn giữa các đại lượng hoặc thể hiện một thành phần cơ cấu trong một tổng thể.',className='content')
             ]),
             html.Div([
-                 html.Span('When using?:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Sử dụng khi nào?:', className='introMatplotlib'),
+                html.Span('Bar chart (biểu đồ cột): thường được dùng khi cần phân loại dữ liệu và so sánh độ tương quản giữa chúng ',className='content')
             ]),
             html.Div([
-                 html.Span('Type of Charts:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Type of Charts:', className='introMatplotlib')
             ]),
             html.Div([
                 html.Div('Type 1:', className='col-3  line-chart'),
@@ -459,7 +460,7 @@ pieChart = html.Div([
     html.Div([
         html.Div([
             html.Ul([
-                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Dash Plotly', href="/simple-chart", className='el'),
                 dcc.Link('Line Chart', href="/line-chart", className='el'),
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
@@ -474,16 +475,15 @@ pieChart = html.Div([
                 dcc.Link('Home Page', href="/"),
             ], className='fl'),
             html.Div([
-                 html.Span('Description:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Mô tả:', className='introMatplotlib'),
+                html.Span('Đây là dạng biểu đồ thường được dùng để vẽ các biểu đồ liên quan đến cơ cấu, tỷ lệ các thành phần trong một tổng thể chung hoặc cũng có thể vẽ biểu đồ tròn khi tỷ lệ % trong bảng số liệu cộng lại tròn 100.',className='content')
             ]),
             html.Div([
-                 html.Span('When using?:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Sử dụng khi nào?:', className='introMatplotlib'),
+                html.Span('Pie chart (biểu đồ tròn) được sử dụng khi cần biểu diễn dữ liệu dưới dạng % ',className='content')
             ]),
             html.Div([
                  html.Span('Type of Charts:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
             ]),
             html.Div([
                 html.Div('Type 1:', className='col-3  line-chart'),
@@ -618,7 +618,7 @@ scatterChart = html.Div([
     html.Div([
         html.Div([
             html.Ul([
-                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Dash Plotly', href="/simple-chart", className='el'),
                 dcc.Link('Line Chart', href="/line-chart", className='el'),
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
@@ -633,16 +633,15 @@ scatterChart = html.Div([
                 dcc.Link('Home Page', href="/"),
             ], className='fl'),
             html.Div([
-                 html.Span('Description:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Mô tả:', className='introMatplotlib'),
+                html.Span('Biểu đồ phân tán trong tiếng Anh là Scatter diagram. Biểu đồ phân tán thực chất là một đồ thị biểu hiện mối tương quan giữa nguyên nhân và kết quả hoặc giữa các yếu tố ảnh hưởng đến chất lượng.',className='content')
             ]),
             html.Div([
-                 html.Span('When using?:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Sử dụng khi nào?:', className='introMatplotlib'),
+                html.Span('Scatter chart (biểu đồ phân tán) thường được sử dụng để thể hiện mối tương quan giữa các yếu tố trên đồ thị. ',className='content')
             ]),
             html.Div([
                  html.Span('Type of Charts:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
             ]),
             html.Div([
                 html.Div('Type 1:', className='col-3  line-chart'),
@@ -724,13 +723,13 @@ u90_array_dot = [u90_dot_2020,u90_dot_2021,u90_dot_2022,
                 u90_dot_2029,u90_dot_2030,u90_dot_2031]
 
 
-schools = np.arange(2020, 2032, 1)
+arangeDot = np.arange(2020, 2032, 1)
 
 
 dot_chart_1_fig = go.Figure()
 dot_chart_1_fig.add_trace(go.Scatter(
     x=u18_array_dot,
-    y=schools,
+    y=arangeDot,
     marker=dict(color="crimson", size=12),
     mode="markers",
     name="dưới 18 tuổi",
@@ -738,14 +737,14 @@ dot_chart_1_fig.add_trace(go.Scatter(
 
 dot_chart_1_fig.add_trace(go.Scatter(
     x=u60_array_dot,
-    y=schools,
+    y=arangeDot,
     marker=dict(color="gold", size=12),
     mode="markers",
     name="từ 18 tới 59 tuổi",
 ))
 dot_chart_1_fig.add_trace(go.Scatter(
     x=u90_array_dot,
-    y=schools,
+    y=arangeDot,
     marker=dict(color="green", size=12),
     mode="markers",
     name="từ 60 tới 80 tuổi",
@@ -754,6 +753,25 @@ dot_chart_1_fig.update_layout(title="Biểu đồ dự đoán 3 lứa tuổi c�
                   xaxis_title="population",
                   yaxis_title="years")
 
+#--------
+#--------
+
+schools = ["2020", "2021", "2022", "2023", "2024", "2025",
+           "2026", "2027", "2028", "2029", "2030",
+           "2031"]
+n_schools = len(schools)
+
+men_salary = arr_bar_male
+women_salary = arr_bar_female
+
+df = pd.DataFrame(dict(school=schools*2, salary=men_salary + women_salary,
+                       gender=["Men"]*n_schools + ["Women"]*n_schools))
+
+# Use column names of df for the different parameters x, y, color, ...
+dot_chart_2_fig = px.scatter(df, x="Năm", y="dân số", color="gender",
+                 title="Biểu đồ thể hiện sự chênh lệch giữa nam và nữ của london 10 năm sau",
+                 labels="population" # customize axis label
+                )
 #------------------------------------------------------
 dotChart = html.Div([
      # home page text
@@ -771,7 +789,7 @@ dotChart = html.Div([
     html.Div([
         html.Div([
             html.Ul([
-                dcc.Link('Matplotlib', href="/simple-chart", className='el'),
+                dcc.Link('Dash Plotly', href="/simple-chart", className='el'),
                 dcc.Link('Line Chart', href="/line-chart", className='el'),
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
@@ -786,16 +804,15 @@ dotChart = html.Div([
                 dcc.Link('Home Page', href="/"),
             ], className='fl'),
             html.Div([
-                 html.Span('Description:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Mô tả:', className='introMatplotlib'),
+                html.Span('Dot chart (biểu đồ chấm) là một dạng biểu đồ phân tán (Scatter chart) thể hiện sự khác biệt giữa hai hoặc nhiều loại dữ liệu trong cùng một thời điểm hoặc giữa hai hay nhiều điều kiện (condition). Hãy so sánh với Biểu đồ cột (Bar chart), biểu đồ chấm (dot chart) dễ nhìn hơn và cho phép người phân tích dễ dàng so sánh các loại dữ liệu.  ',className='content')
             ]),
             html.Div([
-                 html.Span('When using?:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Sử dụng khi nào?:', className='introMatplotlib'),
+                html.Span('Dot chart (biểu đồ chấm) sử dụng khi so sánh dữ liệu phân loại trong cùng một thời gian',className='content')
             ]),
             html.Div([
-                 html.Span('Type of Charts:', className='introMatplotlib'),
-                html.Span('asdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdas dasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd ',className='content')
+                 html.Span('Type of Charts:', className='introMatplotlib')
             ]),
             html.Div([
                 html.Div('Type 1:', className='col-3  line-chart'),
@@ -807,7 +824,7 @@ dotChart = html.Div([
              html.Div([
                 html.Div('Type 2:', className='col-3  line-chart'),
                 html.Div(
-                    dcc.Graph(figure= yScatter_HaveLondon), className='col-12'
+                    dcc.Graph(figure= dot_chart_2_fig), className='col-12'
                 )
             ], className='row'),  
         ],className='col-8 matplotlib bg-light'),
