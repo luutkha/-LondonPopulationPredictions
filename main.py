@@ -747,7 +747,7 @@ dot_chart_1_fig.add_trace(go.Scatter(
     y=arangeDot,
     marker=dict(color="green", size=12),
     mode="markers",
-    name="từ 60 tới 80 tuổi",
+    name="từ 60 tới 90 tuổi",
 ))
 dot_chart_1_fig.update_layout(title="Biểu đồ dự đoán 3 lứa tuổi của thành phố london trong 10 năm sau",
                   xaxis_title="population",
@@ -764,11 +764,11 @@ n_schools = len(schools)
 men_salary = arr_bar_male
 women_salary = arr_bar_female
 
-df = pd.DataFrame(dict(school=schools*2, salary=men_salary + women_salary,
+df = pd.DataFrame(dict(year=schools*2, population=men_salary + women_salary,
                        gender=["Men"]*n_schools + ["Women"]*n_schools))
 
 # Use column names of df for the different parameters x, y, color, ...
-dot_chart_2_fig = px.scatter(df, x="Năm", y="dân số", color="gender",
+dot_chart_2_fig = px.scatter(df, x="population", y="year", color="gender",
                  title="Biểu đồ thể hiện sự chênh lệch giữa nam và nữ của london 10 năm sau",
                  labels="population" # customize axis label
                 )
@@ -831,7 +831,77 @@ dotChart = html.Div([
     ], className = 'row cc')
 ], className='container cc')
 
-
+##---------------------------------------------------------
+DataAnalysis = html.Div([
+     # home page text
+    html.Div('This is project of our team with Dash - plotly ', style={
+        'height': '50px',
+        'width': '100%',
+        'backgroundColor': '#f5f5f5',
+        'paddingLeft': '25px',
+        'position': 'absolute',
+        'top': '0',
+        'left': '0',
+        'display': 'flex',
+        'alignItems': 'center'
+    }),
+    html.Div([
+        html.Div([
+            html.Div([
+                html.Div('Data Analysis', className='title'),
+                dcc.Link('Home Page', href="/"),
+            ], className='fl'),
+            html.Div([
+                 html.Span('- Dữ liệu thu thập được:', className='introMatplotlib'),
+                 html.Div('dữ liệu thứ cấp',className='content')
+            ]),
+             html.Div([
+                 html.Span('- Định nghĩa các biến số:', className='introMatplotlib'),
+                 html.Div('gss_code: (Government Statistical Service code): mã dịch vụ thống kê của chính phủ',className='content'),
+                 html.Div('component: dân số',className='content'),
+                 html.Div('year: năm',className='content'),
+                 html.Div('Births:  sinh',className='content'),
+                 html.Div('Deaths: tử',className='content'),
+                 html.Div('international_in: nhập cư',className='content'),
+                 html.Div('international_out: xuất cư',className='content'),
+                 html.Div('domestic_in: trong nước',className='content'),
+                 html.Div('domestic_out: ngoài nước',className='content'),
+                 html.Div('district: thành phố',className='content'),
+                 html.Div('sex: giới tính',className='content'),
+                 html.Div('age: tuổi',className='content'),
+                 html.Div('2010, 2011,... 2050: các năm dự đoán',className='content'),     
+            ]),
+             html.Div([
+                 html.Span('- Dạng dữ liệu:', className='introMatplotlib'),
+                 html.Div('Định tính: sex, district, component ',className='content'),
+                 html.Div('Định lượng: age, 2010, 2011, … 2050, year, births, deaths, international_in, international_out, domestic_in, domestic_out',className='content'),
+            ]),
+             html.Div([
+                 html.Span('- Thang do cho dữ liệu: ', className='introMatplotlib'),
+                 html.Div('Thang do định danh (norminal): district, sex, component ',className='content'),
+                html.Div('Thang đo khoảng( (interval): 2010, 2011,… 2050 ,year, births, deaths, international_in, international_out, domestic_in, domestic_out ',className='content')
+            ]),
+             html.Div([
+                 html.Span('Kiểu dữ liệu: ', className='introMatplotlib'),
+                 html.Div('String: District, component,sex. ',className='content'),
+                 html.Div('Integer: Age. ',className='content'),
+                 html.Div('Decimal: 2010, 2011, 2012,.. 2050 year, births, deaths, international_in, international_out, domestic_in, domestic_out ',className='content'),
+            ]),
+             html.Div([
+                 html.Span('Mục tiêu nghiên cứu: ', className='introMatplotlib'),
+                 html.Div('nghiên cứu về dân số cùa thành phố london cùng với các thành phố khác trong khu vực và dự đoán dân số. ',className='content')
+            ]),
+             html.Div([
+                 html.Span('Phạm vi nghiên cứu:', className='introMatplotlib'),
+                 html.Div('10 năm sau ( 2020 -> 2031 ).',className='content')
+            ]),
+             html.Div([
+                 html.Span('Nhóm biến tham gia quá trình nghiên cứu:', className='introMatplotlib'),
+                 html.Div('district, sex, age, 2020,… 2031, births, deaths ',className='content')
+            ])
+        ],className='col-12 matplotlib bg-light'),
+    ], className = 'row cc')
+], className='container cc')
 
 
 
@@ -852,6 +922,8 @@ def display_page(pathname):
         return scatterChart
     elif pathname =='/dot-chart':
         return dotChart
+    elif pathname =='/data-analysis':
+        return DataAnalysis
     else:
         return main
 #     elif pathname == '/page2':
