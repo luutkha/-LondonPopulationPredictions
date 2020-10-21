@@ -252,8 +252,8 @@ lineChart = html.Div([
     ], className = 'row cc')
 ], className='container cc')
 
-##-----------------------------------------------------
-# Bar Chart Link
+# ##-----------------------------------------------------
+# # Bar Chart Link
 df_hackney = df_pop_london[['district', 2020]].query('district == "Hackney"')[[2020]].sum()
 df_haringey = df_pop_london[['district', 2020]].query('district == "Haringey"')[[2020]].sum()
 
@@ -270,8 +270,6 @@ df_male_london = pd.read_excel('./central_trend_2017_base.xlsx', sheet_name=1)
 df_female_london = pd.read_excel('./central_trend_2017_base.xlsx', sheet_name=2)
 
 
-df_male_london = pd.read_excel('C:/Users/84912/Downloads/central_trend_2017_base.xlsx', sheet_name=1)
-df_female_london = pd.read_excel('C:/Users/84912/Downloads/central_trend_2017_base.xlsx', sheet_name=2)
 df_bar_male = int(df_male_london[['district', 2020]].query('district == "London"')[[2020]].sum())
 df_bar_male1 = int(df_male_london[['district', 2021]].query('district == "London"')[[2021]].sum())
 df_bar_male2 = int(df_male_london[['district', 2022]].query('district == "London"')[[2022]].sum())
@@ -370,7 +368,7 @@ barChart = html.Div([
                 dcc.Link('Bar Chart', href="/bar-chart", className='el'),
                 dcc.Link('Pie Chart', href="/pie-chart", className='el'),
                 dcc.Link('Scatter Chart', href="/scatter-chart", className='el'),
-                  dcc.Link('Dot Chart', href="/dot-chart", className='el'),
+                dcc.Link('Dot Chart', href="/dot-chart", className='el'),
             ],className='listInside')
         ],
         className='col-3 listContainer bg-light'),
@@ -417,9 +415,12 @@ df_compareAge2020_Pie_u18 = int(df_pop_london[['district', 'age',2020]].query('d
 df_compareAge2020_Pie_u60 = int(df_pop_london[['district', 'age',2020]].query('district == "London" and age < 60 and age >=18 ')[2020].sum())
 df_compareAge2020_Pie_u90 = int( df_pop_london[['district', 'age',2020]].query('district == "London"and age < 90 and age >=60 ')[2020].sum())
 
-pieType1Fig = px.pie(values=[df_compareAge2020_Pie_u18, df_compareAge2020_Pie_u60,df_compareAge2020_Pie_u90], names=['Trẻ em & vị thành niên', 'Người trưởng thành', 'người lớn tuổi'], title='Biểu đồ so sánh dân số 3 độ tuổi của thành phố london trong năm 2020 ')
 
-
+pieType1Fig = go.Figure(data=[go.Pie(labels=['Trẻ em & vị thành niên', 'Người trưởng thành', 'người lớn tuổi'], values=[df_compareAge2020_Pie_u18, df_compareAge2020_Pie_u60,df_compareAge2020_Pie_u90])])
+pieType1Fig.update_layout(
+    title_text="Biểu đồ so sánh dân số 3 độ tuổi của thành phố london trong năm 2020 ",
+    # Add annotations in the center of the donut pies.
+    )
 
 
 df_pop_westminster_2020  = int(df_pop_london[['district', 2020]].query('district == "Westminster"')[[2020]].sum())
@@ -505,7 +506,7 @@ pieChart = html.Div([
 ], className='container cc')
 
 ##______________________________________________________
-##scatter charts
+#scatter charts
 
 df_scatter_citylondon = int(df_pop_london[['district', 2020]].query('district == "City of London"')[[2020]].sum())
 df_scatter_BaD = int(df_pop_london[['district', 2020]].query('district == "Barking and Dagenham"')[[2020]].sum())
@@ -601,7 +602,7 @@ yScatter_HaveLondon.update_layout(title='Dân số tất cả thành phố')
 
 
 
-##-------------------------
+#-------------------------
 scatterChart = html.Div([
      # home page text
     html.Div('This is project of our team with Dash - plotly ', style={
@@ -809,7 +810,7 @@ dotChart = html.Div([
             ]),
             html.Div([
                  html.Span('Sử dụng khi nào?:', className='introMatplotlib'),
-                html.Span('Dot chart (biểu đồ chấm) sử dụng khi so sánh dữ liệu phân loại trong cùng một thời gian',className='content')
+                html.Span('Dot chart (biểu đồ chấm) sử dụng khi so sánh dữ liệu phân loại trong cùng một thời gian.',className='content')
             ]),
             html.Div([
                  html.Span('Type of Charts:', className='introMatplotlib')
@@ -926,11 +927,8 @@ def display_page(pathname):
         return DataAnalysis
     else:
         return main
-#     elif pathname == '/page2':
-#         return page2
-#     else:
-#         return pageDefault
 
+server = app.server
 
 if __name__ == "__main__":
     app.run_server()
